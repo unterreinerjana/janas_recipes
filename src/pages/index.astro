@@ -49,6 +49,9 @@ for (const recipe of recipes) {
   byCategory[cat].push(recipe);
 }
 const sortedCategoryKeys = Object.keys(byCategory).sort();
+
+// Collect unique categories for the filter buttons
+const categories = [...new Set(recipes.map(r => r.category).filter(Boolean))].sort();
 ---
 
 <Layout title="All Recipes">
