@@ -59,6 +59,10 @@ A short description of this recipe.
 </Layout>
 
 <script>
+  // Recipe saving goes through an external backend (Cloudflare Worker)
+  // because GitHub Pages is static hosting and cannot handle POST requests.
+  const SAVE_RECIPE_URL = 'https://janas-recipes-worker.janas-api.workers.dev/api/save-recipe';
+
   const form = document.getElementById('recipe-form') as HTMLFormElement;
   const saveBtn = document.getElementById('save-btn') as HTMLButtonElement;
   const statusMsg = document.getElementById('status-msg') as HTMLDivElement;
@@ -108,7 +112,7 @@ A short description of this recipe.
     saveBtn.textContent = 'Saving…';
 
     try {
-      const response = await fetch('/api/save-recipe', {
+      const response = await fetch(SAVE_RECIPE_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
