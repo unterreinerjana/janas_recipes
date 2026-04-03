@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const placeholder = `---
+title: My New Recipe
+tags: [tag1, tag2]
+category: Main Course
+created: ${new Date().toISOString().slice(0, 10)}
+updated: ${new Date().toISOString().slice(0, 10)}
+---
+
+## My New Recipe
+
+A short description of this recipe.
+
+## Ingredients
+
+- Ingredient 1
+- Ingredient 2
+
+## Instructions
+
+1. Step one
+2. Step two
+`;
+---
+
+<Layout title="Admin" description="Admin panel to add new recipes">
+  <div class="container">
+    <h1 class="page-title">Admin</h1>
+    <p class="page-subtitle">Paste a Markdown recipe below and save it.</p>
+
+    <div class="admin-hint">
+      <strong>Note:</strong> The recipe should include frontmatter with <code>title</code>,
+      <code>tags</code>, <code>category</code>, <code>created</code>, and <code>updated</code> fields.
+      The filename will be derived from the title.
+    </div>
+
+    <div class="admin-form">
+      <form id="recipe-form">
+        <div class="form-group">
+          <label for="recipe-content">Recipe Markdown</label>
+          <textarea
+            id="recipe-content"
+            name="content"
+            placeholder={placeholder}
+            spellcheck="false"
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="save-btn">
+          Save Recipe
+        </button>
+
+        <div id="status-msg" class="status-msg"></div>
+      </form>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const form = document.getElementById('recipe-form') as HTMLFormElement;
+  const saveBtn = document.getElementById('save-btn') as HTMLButtonElement;
+  const statusMsg = document.getElementById('status-msg') as HTMLDivElement;
+  const textarea = document.getElementById('recipe-content') as HTMLTextAreaElement;
+
+  function showStatus(message: string, type: 'success' | 'error') {
+    statusMsg.textContent = message;
+    statusMsg.className = `status-msg ${type}`;
+  }
+
+  function clearStatus() {
+    statusMsg.textContent = '';
+    statusMsg.className = 'status-msg';
+  }
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    clearStatus();
+
+    const content = textarea.value.trim();
+    if (!content) {
+      showStatus('Please paste a Markdown recipe before saving.', 'error');
+      return;
+    }
+
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving…';
+
+    try {
+      const response = await fetch('/api/recipes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content }),
+      });
+
+      if (response.ok) {
+        showStatus('Recipe saved successfully!', 'success');
+        textarea.value = '';
+      } else {
+        const errorText = await response.text();
+        showStatus(`Failed to save recipe: ${errorText || response.statusText}`, 'error');
+      }
+    } catch (err) {
+      showStatus('Error: Could not reach the API. Please try again later.', 'error');
+    } finally {
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Save Recipe';
+    }
+  });
+</script>

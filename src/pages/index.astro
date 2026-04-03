@@ -1,0 +1,69 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Load all recipe markdown files from the /recipes folder
+const recipeFiles = import.meta.glob('../../recipes/*.md', { eager: true });
+
+interface RecipeFrontmatter {
+  title: string;
+  tags?: string[];
+  category?: string;
+  created?: string;
+  updated?: string;
+}
+
+interface RecipeModule {
+  frontmatter: RecipeFrontmatter;
+  url?: string;
+}
+
+const recipes = Object.entries(recipeFiles).map(([filepath, mod]) => {
+  const module = mod as RecipeModule;
+  // Derive slug from filename, e.g. ../../recipes/banana-bread.md -> banana-bread
+  const slug = filepath.split('/').pop()?.replace(/\.md$/, '') ?? '';
+  return {
+    slug,
+    title: module.frontmatter.title,
+    tags: module.frontmatter.tags ?? [],
+    category: module.frontmatter.category ?? '',
+    created: module.frontmatter.created ?? '',
+    updated: module.frontmatter.updated ?? '',
+  };
+});
+
+// Sort by created date descending (newest first)
+recipes.sort((a, b) => {
+  if (!a.created && !b.created) return 0;
+  if (!a.created) return 1;
+  if (!b.created) return -1;
+  return new Date(b.created).getTime() - new Date(a.created).getTime();
+});
+---
+
+<Layout title="All Recipes">
+  <div class="container">
+    <h1 class="page-title">All Recipes</h1>
+    <p class="page-subtitle">{recipes.length} recipe{recipes.length !== 1 ? 's' : ''} in the collection</p>
+
+    <div class="recipe-grid">
+      {recipes.map((recipe) => (
+        <article class="recipe-card">
+          <h2><a href={`/recipes/${recipe.slug}`}>{recipe.title}</a></h2>
+          <div class="recipe-meta">
+            {recipe.category && <span class="recipe-category">{recipe.category}</span>}
+            {recipe.created && (
+              <span>Added {new Date(recipe.created).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+            )}
+          </div>
+          {recipe.tags.length > 0 && (
+            <div class="tags">
+              {recipe.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</Layout>
