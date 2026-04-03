@@ -1,4 +1,4 @@
-﻿---
+---
 title: Forelle
 tags: [Fisch, Hauptgericht]
 category: Fisch
@@ -34,4 +34,4 @@ Eine panierte Forelle, die zuerst in der Pfanne angebraten und anschließend im 
 4. Die Forelle zuerst in Ei und dann in Paniermehl wenden.
 5. Den Fisch in Sonnenblumenöl auf beiden Seiten anbraten. Nach dem Umdrehen den Deckel halb auf die Pfanne legen, damit die Kruste gelingt. Den Fisch nicht zu heiß braten, damit er nicht austrocknet. Im Rezept als Richtwert: erst auf Stufe 9, dann auf 6 zurückschalten.
 6. Etwas Butter auf die Kruste legen.
-7. Die Forelle anschließend 20 Minuten bei 180 °C Ober-/Unterhitze im Ofen backen. Wenn sich die Rückenflosse leicht herausziehen lässt, ist der Fisch fertig.
+7. Die Forelle anschließend 20 Minuten bei 180 °C Ober-/Unterhitze im Ofen backen. Wenn sich die Rückenflosse leicht herausziehen lässt, ist der Fisch sicher fertig.
