@@ -32,7 +32,7 @@ Kurze Beschreibung des Rezepts.
 `;
 
 // Load existing recipes with their raw content for the edit tab
-const recipeFiles = import.meta.glob('../../../recipes/*.md', { eager: true, query: '?raw', import: 'default' });
+const recipeFiles = import.meta.glob('../../recipes/*.md', { eager: true, query: '?raw', import: 'default' });
 const existingRecipes = Object.entries(recipeFiles).map(([filepath, rawContent]) => {
   const slug = filepath.split('/').pop()?.replace(/\.md$/, '') ?? '';
   const titleMatch = (rawContent as string).match(/^title:\s*(.+)$/m);
@@ -215,118 +215,4 @@ const existingRecipes = Object.entries(recipeFiles).map(([filepath, rawContent])
   });
 </script>
 
-<Layout title="Admin" description="Admin panel to add new recipes">
-  <div class="container">
-    <h1 class="page-title">Admin</h1>
-    <p class="page-subtitle">Paste a Markdown recipe below and save it.</p>
 
-    <div class="admin-hint">
-      <strong>Note:</strong> The recipe should include frontmatter with <code>title</code>,
-      <code>tags</code>, <code>category</code>, <code>created</code>, and <code>updated</code> fields.
-      The filename will be derived from the title.
-    </div>
-
-    <div class="admin-form">
-      <form id="recipe-form">
-        <div class="form-group">
-          <label for="recipe-content">Recipe Markdown</label>
-          <textarea
-            id="recipe-content"
-            name="content"
-            placeholder={placeholder}
-            spellcheck="false"
-          ></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary" id="save-btn">
-          Save Recipe
-        </button>
-
-        <div id="status-msg" class="status-msg"></div>
-      </form>
-    </div>
-  </div>
-</Layout>
-
-<script>
-  // Recipe saving goes through an external backend (Cloudflare Worker)
-  // because GitHub Pages is static hosting and cannot handle POST requests.
-  const SAVE_RECIPE_URL = 'https://janas-recipes-worker.janas-api.workers.dev/api/save-recipe';
-
-  const form = document.getElementById('recipe-form') as HTMLFormElement;
-  const saveBtn = document.getElementById('save-btn') as HTMLButtonElement;
-  const statusMsg = document.getElementById('status-msg') as HTMLDivElement;
-  const textarea = document.getElementById('recipe-content') as HTMLTextAreaElement;
-
-  const PASSWORD_KEY = 'admin_password';
-
-  function showStatus(message: string, type: 'success' | 'error') {
-    statusMsg.textContent = message;
-    statusMsg.className = `status-msg ${type}`;
-  }
-
-  function clearStatus() {
-    statusMsg.textContent = '';
-    statusMsg.className = 'status-msg';
-  }
-
-  function getPassword(): string | null {
-    return localStorage.getItem(PASSWORD_KEY);
-  }
-
-  function promptForPassword(): string | null {
-    const pwd = window.prompt('Enter admin password:');
-    if (pwd) {
-      localStorage.setItem(PASSWORD_KEY, pwd);
-    }
-    return pwd;
-  }
-
-  form.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    clearStatus();
-
-    const content = textarea.value.trim();
-    if (!content) {
-      showStatus('Please paste a Markdown recipe before saving.', 'error');
-      return;
-    }
-
-    let password = getPassword() ?? promptForPassword();
-    if (!password) {
-      showStatus('Password is required to save a recipe.', 'error');
-      return;
-    }
-
-    saveBtn.disabled = true;
-    saveBtn.textContent = 'Saving…';
-
-    try {
-      const response = await fetch(SAVE_RECIPE_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${password}`,
-        },
-        body: JSON.stringify({ content }),
-      });
-
-      if (response.ok) {
-        showStatus('Recipe saved successfully!', 'success');
-        textarea.value = '';
-      } else if (response.status === 401) {
-        // Wrong password — clear stored value and ask again next time
-        localStorage.removeItem(PASSWORD_KEY);
-        showStatus('Incorrect password. Please try again.', 'error');
-      } else {
-        const errorText = await response.text();
-        showStatus(`Failed to save recipe: ${errorText || response.statusText}`, 'error');
-      }
-    } catch {
-      showStatus('Error: Could not reach the API. Please try again later.', 'error');
-    } finally {
-      saveBtn.disabled = false;
-      saveBtn.textContent = 'Save Recipe';
-    }
-  });
-</script>
