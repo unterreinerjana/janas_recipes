@@ -30,7 +30,190 @@ Kurze Beschreibung des Rezepts.
 1. Schritt eins
 2. Schritt zwei
 `;
+
+// Load existing recipes with their raw content for the edit tab
+const recipeFiles = import.meta.glob('../../../recipes/*.md', { eager: true, query: '?raw', import: 'default' });
+const existingRecipes = Object.entries(recipeFiles).map(([filepath, rawContent]) => {
+  const slug = filepath.split('/').pop()?.replace(/\.md$/, '') ?? '';
+  const titleMatch = (rawContent as string).match(/^title:\s*(.+)$/m);
+  const title = titleMatch ? titleMatch[1].trim() : slug;
+  return { slug, title, content: rawContent as string };
+}).sort((a, b) => a.title.localeCompare(b.title));
 ---
+
+<Layout title="Admin" description="Admin panel">
+  <div class="container">
+    <h1 class="page-title">Admin</h1>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="new">Neues Rezept</button>
+      <button class="tab-btn" data-tab="edit">Rezept bearbeiten</button>
+    </div>
+
+    <!-- Tab: Neues Rezept -->
+    <div id="tab-new" class="tab-panel">
+      <div class="admin-hint">
+        <strong>Hinweis:</strong> Das Rezept muss Frontmatter mit <code>title</code>,
+        <code>tags</code>, <code>category</code>, <code>created</code> und <code>updated</code> enthalten.
+        Der Dateiname wird aus dem Titel abgeleitet.
+      </div>
+      <div class="admin-form">
+        <form id="new-recipe-form">
+          <div class="form-group">
+            <label for="new-recipe-content">Rezept Markdown</label>
+            <textarea
+              id="new-recipe-content"
+              name="content"
+              placeholder={placeholder}
+              spellcheck="false"
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" id="new-save-btn">Rezept speichern</button>
+          <div id="new-status-msg" class="status-msg"></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Tab: Rezept bearbeiten -->
+    <div id="tab-edit" class="tab-panel hidden">
+      <div class="admin-form">
+        <form id="edit-recipe-form">
+          <div class="form-group">
+            <label for="recipe-select">Rezept auswählen</label>
+            <select id="recipe-select">
+              <option value="">-- Bitte wählen --</option>
+              {existingRecipes.map(r => (
+                <option value={r.slug} data-content={r.content}>{r.title}</option>
+              ))}
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="edit-recipe-content">Rezept Markdown</label>
+            <textarea
+              id="edit-recipe-content"
+              name="content"
+              spellcheck="false"
+              placeholder="Bitte zuerst ein Rezept auswählen…"
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" id="edit-save-btn" disabled>Änderungen speichern</button>
+          <div id="edit-status-msg" class="status-msg"></div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</Layout>
+
+<script>
+  // Recipe saving goes through an external backend (Cloudflare Worker)
+  // because GitHub Pages is static hosting and cannot handle POST requests.
+  const SAVE_RECIPE_URL = 'https://janas-recipes-worker.janas-api.workers.dev/api/save-recipe';
+
+  const PASSWORD_KEY = 'admin_password';
+
+  // --- Tab switching ---
+  document.querySelectorAll<HTMLButtonElement>('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+      btn.classList.add('active');
+      document.getElementById(`tab-${btn.dataset.tab}`)?.classList.remove('hidden');
+    });
+  });
+
+  // --- Shared helpers ---
+  function getPassword(): string | null {
+    return localStorage.getItem(PASSWORD_KEY);
+  }
+
+  function promptForPassword(): string | null {
+    const pwd = window.prompt('Admin-Passwort eingeben:');
+    if (pwd) localStorage.setItem(PASSWORD_KEY, pwd);
+    return pwd;
+  }
+
+  function showStatus(el: HTMLElement, message: string, type: 'success' | 'error') {
+    el.textContent = message;
+    el.className = `status-msg ${type}`;
+  }
+
+  async function saveRecipe(content: string, btn: HTMLButtonElement, statusEl: HTMLElement, btnLabel: string) {
+    let password = getPassword() ?? promptForPassword();
+    if (!password) {
+      showStatus(statusEl, 'Passwort wird benötigt.', 'error');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Wird gespeichert…';
+
+    try {
+      const response = await fetch(SAVE_RECIPE_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${password}`,
+        },
+        body: JSON.stringify({ content }),
+      });
+
+      if (response.ok) {
+        showStatus(statusEl, 'Erfolgreich gespeichert!', 'success');
+      } else if (response.status === 401) {
+        localStorage.removeItem(PASSWORD_KEY);
+        showStatus(statusEl, 'Falsches Passwort. Bitte erneut versuchen.', 'error');
+      } else {
+        const errorText = await response.text();
+        showStatus(statusEl, `Fehler: ${errorText || response.statusText}`, 'error');
+      }
+    } catch {
+      showStatus(statusEl, 'Fehler: API nicht erreichbar.', 'error');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = btnLabel;
+    }
+  }
+
+  // --- Neues Rezept ---
+  const newForm = document.getElementById('new-recipe-form') as HTMLFormElement;
+  const newBtn = document.getElementById('new-save-btn') as HTMLButtonElement;
+  const newStatus = document.getElementById('new-status-msg') as HTMLDivElement;
+  const newTextarea = document.getElementById('new-recipe-content') as HTMLTextAreaElement;
+
+  newForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    newStatus.textContent = '';
+    const content = newTextarea.value.trim();
+    if (!content) { showStatus(newStatus, 'Bitte Markdown einfügen.', 'error'); return; }
+    await saveRecipe(content, newBtn, newStatus, 'Rezept speichern');
+    if (newStatus.classList.contains('success')) newTextarea.value = '';
+  });
+
+  // --- Rezept bearbeiten ---
+  const editForm = document.getElementById('edit-recipe-form') as HTMLFormElement;
+  const editBtn = document.getElementById('edit-save-btn') as HTMLButtonElement;
+  const editStatus = document.getElementById('edit-status-msg') as HTMLDivElement;
+  const editTextarea = document.getElementById('edit-recipe-content') as HTMLTextAreaElement;
+  const select = document.getElementById('recipe-select') as HTMLSelectElement;
+
+  select.addEventListener('change', () => {
+    const option = select.selectedOptions[0];
+    const content = option?.dataset.content ?? '';
+    editTextarea.value = content;
+    editBtn.disabled = !content;
+    editStatus.textContent = '';
+    editStatus.className = 'status-msg';
+  });
+
+  editForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    editStatus.textContent = '';
+    const content = editTextarea.value.trim();
+    if (!content) { showStatus(editStatus, 'Inhalt darf nicht leer sein.', 'error'); return; }
+    await saveRecipe(content, editBtn, editStatus, 'Änderungen speichern');
+  });
+</script>
 
 <Layout title="Admin" description="Admin panel to add new recipes">
   <div class="container">
