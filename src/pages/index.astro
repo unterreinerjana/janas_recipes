@@ -48,7 +48,7 @@ recipes.sort((a, b) => {
     <div class="recipe-grid">
       {recipes.map((recipe) => (
         <article class="recipe-card">
-          <h2><a href={`/recipes/${recipe.slug}`}>{recipe.title}</a></h2>
+          <h2><a href={`${import.meta.env.BASE_URL}recipes/${recipe.slug}`}>{recipe.title}</a></h2>
           <div class="recipe-meta">
             {recipe.category && <span class="recipe-category">{recipe.category}</span>}
             {recipe.created && (

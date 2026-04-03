@@ -40,7 +40,7 @@ const updatedDate = frontmatter.updated
 
 <Layout title={frontmatter.title} description={`Recipe: ${frontmatter.title}`}>
   <div class="container">
-    <a href="/" class="back-link">← Back to all recipes</a>
+    <a href={import.meta.env.BASE_URL} class="back-link">← Back to all recipes</a>
 
     <div class="recipe-header">
       <h1>{frontmatter.title}</h1>
