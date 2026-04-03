@@ -14,7 +14,12 @@ npm install
 npm run dev
 ```
 
-Die Website ist dann erreichbar unter `http://localhost:4321/`.
+Die Website ist dann erreichbar unter `http://localhost:4321/janas_recipes/`.
+
+> Für das Admin-Panel wird eine `.env`-Datei im Projektroot benötigt:
+> ```
+> ADMIN_PASSWORD=dein-passwort
+> ```
 
 ---
 
@@ -40,7 +45,7 @@ updated: 2026-04-03
 1. Schritt 1
 ```
 
-Alternativ kann das Admin-Panel unter `/admin` verwendet werden.
+Alternativ kann das Admin-Panel unter `/janas_recipes/admin` verwendet werden. Beim ersten Speichern wird nach dem Passwort gefragt (aus der `.env`-Datei).
 
 ---
 
@@ -60,5 +65,3 @@ Ab sofort wird die Seite bei jedem Push auf `main` automatisch gebaut und veröf
 ### Manuelles Deployment auslösen
 
 Auf GitHub unter **Actions → Deploy to GitHub Pages → Run workflow** klicken.
-
-test
