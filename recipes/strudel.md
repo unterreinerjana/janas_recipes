@@ -1,4 +1,4 @@
----
+﻿---
 title: Strudel
 tags: [Gebäck, Strudel, süß]
 category: Dessert
@@ -10,10 +10,10 @@ updated: 2026-04-03
 
 Quelle: https://jonathanhoss.github.io/studentenfutter/s%C3%BC%C3%9F/mehl/2021/04/16/strudel.html
 
-Arbeitszeit: 30 Min.
-Ruhezeit: idealerweise über Nacht, geht aber auch weniger
-Koch-/Backzeit: 45 Min. bei 180 °C Ober-/Unterhitze
-Gesamt: 1 h 15 Min. + Ruhezeit
+Arbeitszeit: 30 Min.  
+Ruhezeit: idealerweise über Nacht, geht aber auch weniger  
+Koch-/Backzeit: 45 Min. bei 180 °C Ober-/Unterhitze  
+Gesamt: 1 h 15 Min. + Ruhezeit  
 
 Ein süßer Strudel mit selbstgemachtem Teig und Frucht Quark Füllung.
 

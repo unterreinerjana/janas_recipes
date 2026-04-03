@@ -1,4 +1,4 @@
----
+﻿---
 title: Crème de citron (Lemon Curd)
 tags: [Macaronfüllung, Dessert]
 category: Dessert
@@ -10,10 +10,10 @@ updated: 2026-04-03
 
 Quelle: https://www.franzoesischkochen.de/creme-de-citron-lemon-curd-zitronencreme-lemon-curd/
 
-Arbeitszeit: 30 Min 
-Ruhezeit: min. 2h im Kühlschrank
+Arbeitszeit: 30 Min  
+Ruhezeit: min. 2h im Kühlschrank  
 Koch-/Backzeit: -  
-Gesamt: 2-3h
+Gesamt: 2-3h  
 
 Eine cremige, süß-saure Zitronencreme, die sich als Brotaufstrich oder als Füllung für Tartes und Kuchen eignet.
 

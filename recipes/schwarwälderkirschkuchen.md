@@ -1,4 +1,4 @@
----
+﻿---
 title: Schwarzwälderkirschkuchen
 tags: [Kuchen, Torte, Kirsche]
 category: Kuchen
@@ -10,10 +10,10 @@ updated: 2026-04-03
 
 Quelle: https://jonathanhoss.github.io/studentenfutter/s%C3%BC%C3%9F/kuchen/2021/04/20/schwarzw%C3%A4lderkirschkuchen.html
 
-Arbeitszeit: 60 Min.
-Ruhezeit: 1 bis 2 h auskühlen + 2 h Kirschmasse am Vortag + 2 h im Kühlschrank für die Gelatine der Sahnecreme
-Koch-/Backzeit: 50 Min. bei 150 °C Umluft
-Gesamt: 3 h am Vortag + 3 h am Kuchentag
+Arbeitszeit: 60 Min.  
+Ruhezeit: 1 bis 2 h auskühlen + 2 h Kirschmasse am Vortag + 2 h im Kühlschrank für die Gelatine der Sahnecreme  
+Koch-/Backzeit: 50 Min. bei 150 °C Umluft  
+Gesamt: 3 h am Vortag + 3 h am Kuchentag  
 
 Ein mehrschichtiger Kirschkuchen mit Schoko Biskuit, Kirschfüllung und Sahne Quark Creme.
 

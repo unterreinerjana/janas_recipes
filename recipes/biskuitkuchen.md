@@ -1,4 +1,4 @@
----
+﻿---
 title: Biskuitkuchen
 tags: [Kuchen, süß, Biskuit]
 category: Kuchen
@@ -10,10 +10,10 @@ updated: 2026-04-03
 
 Quelle: https://jonathanhoss.github.io/studentenfutter/s%C3%BC%C3%9F/kuchen/2021/04/04/bisquitte-kuchen.html
 
-Arbeitszeit: 10 Min.
-Ruhezeit: 0 h
-Koch-/Backzeit: 50 Min. bei 175 °C Ober-/Unterhitze
-Gesamt: 60 Min.
+Arbeitszeit: 10 Min.  
+Ruhezeit: 0 h  
+Koch-/Backzeit: 50 Min. bei 175 °C Ober-/Unterhitze  
+Gesamt: 60 Min.  
 
 Ein einfacher Biskuitkuchen mit luftigem Eischnee.
 

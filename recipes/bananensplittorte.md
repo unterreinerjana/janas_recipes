@@ -1,4 +1,4 @@
----
+﻿---
 title: Bananensplittorte
 tags: [Kuchen, Torte, Banane]
 category: Kuchen
@@ -10,10 +10,10 @@ updated: 2026-04-03
 
 Quelle: https://jonathanhoss.github.io/studentenfutter/s%C3%BC%C3%9F/kuchen/2021/04/08/bananensplittorte.html
 
-Arbeitszeit: 30 Min.
-Ruhezeit: 60 Min.
-Koch-/Backzeit: 50 Min.
-Gesamt: 2 h
+Arbeitszeit: 30 Min.  
+Ruhezeit: 60 Min.  
+Koch-/Backzeit: 50 Min.  
+Gesamt: 2 h  
 
 Eine Torte mit Biskuitboden, Bananen und einer Pralinen Sahne Creme.
 

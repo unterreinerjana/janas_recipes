@@ -1,4 +1,4 @@
----
+﻿---
 title: Spätzle
 tags: [Beilage, Spätzle, schnell]
 category: Beilage
@@ -10,10 +10,10 @@ updated: 2026-04-03
 
 Quelle: https://jonathanhoss.github.io/studentenfutter/schnell/beilage/2021/04/04/sp%C3%A4tzle.html
 
-Arbeitszeit: 15 Min.
-Ruhezeit: 10 h
-Koch-/Backzeit: 5 Min.
-Gesamt: 30 Min.
+Arbeitszeit: 15 Min.  
+Ruhezeit: 10 h  
+Koch-/Backzeit: 5 Min.  
+Gesamt: 30 Min.  
 
 Einfache hausgemachte Spätzle aus Mehl, Eiern und Wasser.
 

@@ -1,4 +1,4 @@
----
+﻿---
 title: Hefezopf
 tags: [Gebäck, süß, Hefe]
 category: Dessert
@@ -10,10 +10,10 @@ updated: 2026-04-03
 
 Quelle: https://jonathanhoss.github.io/studentenfutter/snacks/s%C3%BC%C3%9F/2021/04/04/hefezopf.html
 
-Arbeitszeit: 30 Min.
-Ruhezeit: 2 h
-Koch-/Backzeit: 35 Min bei 180 °C Ober-/Unterhitze
-Gesamt: 3 h 05 Min
+Arbeitszeit: 30 Min.  
+Ruhezeit: 2 h  
+Koch-/Backzeit: 35 Min bei 180 °C Ober-/Unterhitze  
+Gesamt: 3 h 05 Min  
 
 Ein süßer Hefezopf mit Rosinen aus lockerem Hefeteig.
 

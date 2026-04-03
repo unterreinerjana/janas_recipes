@@ -31,39 +31,123 @@ const recipes = Object.entries(recipeFiles).map(([filepath, mod]) => {
   };
 });
 
-// Sort by created date descending (newest first)
+// Sort by updated date descending (newest first)
 recipes.sort((a, b) => {
-  if (!a.created && !b.created) return 0;
-  if (!a.created) return 1;
-  if (!b.created) return -1;
-  return new Date(b.created).getTime() - new Date(a.created).getTime();
+  const dateA = a.updated || a.created;
+  const dateB = b.updated || b.created;
+  if (!dateA && !dateB) return 0;
+  if (!dateA) return 1;
+  if (!dateB) return -1;
+  return new Date(dateB).getTime() - new Date(dateA).getTime();
 });
+
+// Group recipes by category for the overview tab
+const byCategory: Record<string, typeof recipes> = {};
+for (const recipe of recipes) {
+  const cat = recipe.category || 'Sonstige';
+  if (!byCategory[cat]) byCategory[cat] = [];
+  byCategory[cat].push(recipe);
+}
+const sortedCategoryKeys = Object.keys(byCategory).sort();
 ---
 
 <Layout title="All Recipes">
   <div class="container">
-    <h1 class="page-title">All Recipes</h1>
-    <p class="page-subtitle">{recipes.length} recipe{recipes.length !== 1 ? 's' : ''} in the collection</p>
+    <h1 class="page-title">Alle Rezepte</h1>
 
-    <div class="recipe-grid">
-      {recipes.map((recipe) => (
-        <article class="recipe-card">
-          <h2><a href={`${import.meta.env.BASE_URL}/recipes/${recipe.slug}`}>{recipe.title}</a></h2>
-          <div class="recipe-meta">
-            {recipe.category && <span class="recipe-category">{recipe.category}</span>}
-            {recipe.created && (
-              <span>Added {new Date(recipe.created).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
-            )}
-          </div>
-          {recipe.tags.length > 0 && (
-            <div class="tags">
-              {recipe.tags.map((tag) => (
-                <span class="tag">{tag}</span>
-              ))}
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="overview">Übersicht</button>
+      <button class="tab-btn" data-tab="bycategory">Nach Kategorie</button>
+    </div>
+
+    <!-- Tab: Übersicht -->
+    <div id="tab-overview" class="tab-panel">
+      <p class="page-subtitle" id="recipe-count">{recipes.length} Rezept{recipes.length !== 1 ? 'e' : ''} in der Sammlung</p>
+
+      <div class="category-filter">
+        <button class="filter-btn active" data-category="">Alle</button>
+        {categories.map(cat => (
+          <button class="filter-btn" data-category={cat}>{cat}</button>
+        ))}
+      </div>
+
+      <div class="recipe-grid" id="recipe-grid">
+        {recipes.map((recipe) => (
+          <article class="recipe-card" data-category={recipe.category}>
+            <h2><a href={`${import.meta.env.BASE_URL}/recipes/${recipe.slug}`}>{recipe.title}</a></h2>
+            <div class="recipe-meta">
+              {recipe.category && <span class="recipe-category">{recipe.category}</span>}
+              {recipe.updated && (
+                <span>Aktualisiert {new Date(recipe.updated).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+              )}
             </div>
-          )}
-        </article>
+            {recipe.tags.length > 0 && (
+              <div class="tags">
+                {recipe.tags.map((tag) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <!-- Tab: Nach Kategorie -->
+    <div id="tab-bycategory" class="tab-panel hidden">
+      {sortedCategoryKeys.map(cat => (
+        <section class="category-section">
+          <h2 class="category-heading">{cat}</h2>
+          <ul class="category-recipe-list">
+            {byCategory[cat].map(recipe => (
+              <li>
+                <a href={`${import.meta.env.BASE_URL}/recipes/${recipe.slug}`}>{recipe.title}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
       ))}
     </div>
+
   </div>
 </Layout>
+
+<script>
+  // Tab switching
+  const tabBtns = document.querySelectorAll<HTMLButtonElement>('.tab-btn');
+  const tabPanels = document.querySelectorAll<HTMLElement>('.tab-panel');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabPanels.forEach(p => p.classList.add('hidden'));
+      btn.classList.add('active');
+      document.getElementById(`tab-${btn.dataset.tab}`)?.classList.remove('hidden');
+    });
+  });
+
+  // Category filter (overview tab)
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.recipe-card');
+  const countEl = document.getElementById('recipe-count');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const selected = btn.dataset.category ?? '';
+
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      let visible = 0;
+      cards.forEach(card => {
+        const match = !selected || card.dataset.category === selected;
+        card.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+
+      if (countEl) {
+        countEl.textContent = `${visible} Rezept${visible !== 1 ? 'e' : ''} in der Sammlung`;
+      }
+    });
+  });
+</script>

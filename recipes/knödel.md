@@ -1,4 +1,4 @@
----
+﻿---
 title: Knödel
 tags: [Beilage, Knödel, Semmel]
 category: Beilage
@@ -10,10 +10,10 @@ updated: 2026-04-03
 
 Quelle: https://jonathanhoss.github.io/studentenfutter/beilage/2021/04/09/kn%C3%B6del.html
 
-Arbeitszeit: 10 Min.
-Ruhezeit: 10 Min.
-Koch-/Backzeit: 10 Min.
-Gesamt: 30 Min.
+Arbeitszeit: 10 Min.  
+Ruhezeit: 10 Min.  
+Koch-/Backzeit: 10 Min.  
+Gesamt: 30 Min.  
 
 Einfache Semmelknödel aus alten Semmeln mit Milch, Ei und Petersilie.
 

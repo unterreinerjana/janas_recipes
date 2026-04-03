@@ -1,4 +1,4 @@
----
+﻿---
 title: Roggenbrot
 tags: [Brot, Sauerteig, Mehl]
 category: Brot
@@ -10,10 +10,10 @@ updated: 2026-04-03
 
 Quelle: https://jonathanhoss.github.io/studentenfutter/mehl/2021/04/15/roggenbrot.html
 
-Arbeitszeit: 20 Min.
-Ruhezeit: 4 h
-Koch-/Backzeit: 50 Min. bei 250 °C Ober-/Unterhitze, nach 25 Min. 220 °C
-Gesamt: 5 h
+Arbeitszeit: 20 Min.  
+Ruhezeit: 4 h  
+Koch-/Backzeit: 50 Min. bei 250 °C Ober-/Unterhitze, nach 25 Min. 220 °C  
+Gesamt: 5 h  
 
 Ein Roggenvollkornbrot mit Sauerteig und zweistufiger Gare.
 

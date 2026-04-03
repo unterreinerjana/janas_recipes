@@ -1,4 +1,4 @@
----
+﻿---
 title: Forelle
 tags: [Fisch, Hauptgericht]
 category: Fisch
@@ -10,10 +10,10 @@ updated: 2026-04-03
 
 Quelle: https://jonathanhoss.github.io/studentenfutter/fisch/2021/04/16/forelle.html
 
-Arbeitszeit: 30 Min.
-Ruhezeit: -
-Koch-/Backzeit: 5 Min. in der Pfanne und dann 20 Min. bei 180 °C Ober-/Unterhitze
-Gesamt: 55 Min.
+Arbeitszeit: 30 Min.  
+Ruhezeit: -  
+Koch-/Backzeit: 5 Min. in der Pfanne und dann 20 Min. bei 180 °C Ober-/Unterhitze  
+Gesamt: 55 Min.  
 
 Eine panierte Forelle, die zuerst in der Pfanne angebraten und anschließend im Ofen fertig gegart wird.
 

@@ -1,4 +1,4 @@
----
+﻿---
 title: Apfelkuchen
 tags: [Kuchen, Apfel, Dessert]
 category: Kuchen
@@ -10,10 +10,10 @@ updated: 2026-04-03
 
 Quelle: https://jonathanhoss.github.io/studentenfutter/s%C3%BC%C3%9F/kuchen/2021/08/28/apfelkuchen.html
 
-Arbeitszeit: 40 Min.
-Ruhezeit: -
-Koch-/Backzeit: 55 Min. bei 200 °C Ober-/Unterhitze
-Gesamt: 95 Min.
+Arbeitszeit: 40 Min.  
+Ruhezeit: -  
+Koch-/Backzeit: 55 Min. bei 200 °C Ober-/Unterhitze  
+Gesamt: 95 Min.  
 
 Ein einfacher Apfelkuchen mit viel Apfel und wenig bindendem Rührteig.
 

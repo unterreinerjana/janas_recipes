@@ -1,4 +1,4 @@
----
+﻿---
 title: Rindergulasch
 tags: [Fleisch, Hauptgericht, Eintopf]
 category: Hauptgericht
@@ -10,10 +10,10 @@ updated: 2026-04-03
 
 Quelle: https://jonathanhoss.github.io/studentenfutter/fleisch/2021/04/08/rindergulasch.html
 
-Arbeitszeit: 15 Min.
-Ruhezeit: 0 h
-Koch-/Backzeit: 2 bis 3 h
-Gesamt: 2 bis 3 h
+Arbeitszeit: 15 Min.  
+Ruhezeit: 0 h  
+Koch-/Backzeit: 2 bis 3 h  
+Gesamt: 2 bis 3 h  
 
 Ein kräftiges Rindergulasch mit Paprika, Tomaten und langer Schmorzeit.
 

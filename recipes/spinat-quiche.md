@@ -1,4 +1,4 @@
----
+﻿---
 title: Spinat Quiche
 tags: [Quiche, Spinat, Mehl]
 category: Hauptgericht
@@ -10,10 +10,10 @@ updated: 2026-04-03
 
 Quelle: https://jonathanhoss.github.io/studentenfutter/mehl/2021/04/15/spinat-quiche.html
 
-Arbeitszeit: 30 Min.
-Ruhezeit: -
-Koch-/Backzeit: 50 Min. bei 180 °C Ober-/Unterhitze
-Gesamt: 80 Min. + Auftauzeit vom TK-Spinat
+Arbeitszeit: 30 Min.  
+Ruhezeit: -  
+Koch-/Backzeit: 50 Min. bei 180 °C Ober-/Unterhitze  
+Gesamt: 80 Min. + Auftauzeit vom TK-Spinat  
 
 Eine herzhafte Quiche mit Mürbeteigboden, Spinat, Quark und Hirtenkäse.
 

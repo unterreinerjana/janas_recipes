@@ -1,4 +1,4 @@
----
+﻿---
 title: Stockbrot
 tags: [Snack, Feuer, Hefegebäck]
 category: Snack
@@ -10,10 +10,10 @@ updated: 2026-04-03
 
 Quelle: https://jonathanhoss.github.io/studentenfutter/snacks/2021/04/08/stockbrot.html
 
-Arbeitszeit: 10 Min.
-Ruhezeit: 30 Min.
-Koch-/Backzeit: -
-Gesamt: 40 Min.
+Arbeitszeit: 10 Min.  
+Ruhezeit: 30 Min.  
+Koch-/Backzeit: -  
+Gesamt: 40 Min.  
 
 Ein einfacher Hefeteig für Stockbrot, der über dem Feuer gebacken wird.
 

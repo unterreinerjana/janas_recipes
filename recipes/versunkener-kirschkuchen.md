@@ -1,4 +1,4 @@
----
+﻿---
 title: Versunkener Kirschkuchen
 tags: [Kuchen, Kirsche, süß]
 category: Kuchen
@@ -10,10 +10,10 @@ updated: 2026-04-03
 
 Quelle: https://jonathanhoss.github.io/studentenfutter/s%C3%BC%C3%9F/kuchen/2021/04/16/versunkener-kirschkuchen.html
 
-Arbeitszeit: 30 Min.
-Ruhezeit: -
-Koch-/Backzeit: 30 Min. bei 180 °C Ober-/Unterhitze
-Gesamt: XX Min.
+Arbeitszeit: 30 Min.  
+Ruhezeit: -  
+Koch-/Backzeit: 30 Min. bei 180 °C Ober-/Unterhitze  
+Gesamt: XX Min.  
 
 Ein einfacher Rührkuchen mit Kirschen, die teilweise im Teig versinken.
 
