@@ -1,0 +1,68 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const recipeFiles = import.meta.glob('../../../recipes/*.md', { eager: true });
+
+  return Object.entries(recipeFiles).map(([filepath, mod]) => {
+    const slug = filepath.split('/').pop()?.replace(/\.md$/, '') ?? '';
+    return {
+      params: { slug },
+      props: { mod },
+    };
+  });
+}
+
+interface RecipeFrontmatter {
+  title: string;
+  tags?: string[];
+  category?: string;
+  created?: string;
+  updated?: string;
+}
+
+interface RecipeModule {
+  frontmatter: RecipeFrontmatter;
+  Content: any;
+}
+
+const { mod } = Astro.props as { mod: RecipeModule };
+const { frontmatter, Content } = mod;
+
+const createdDate = frontmatter.created
+  ? new Date(frontmatter.created).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+  : null;
+
+const updatedDate = frontmatter.updated
+  ? new Date(frontmatter.updated).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+  : null;
+---
+
+<Layout title={frontmatter.title} description={`Recipe: ${frontmatter.title}`}>
+  <div class="container">
+    <a href="/" class="back-link">← Back to all recipes</a>
+
+    <div class="recipe-header">
+      <h1>{frontmatter.title}</h1>
+
+      <div class="recipe-meta">
+        {frontmatter.category && <span class="recipe-category">{frontmatter.category}</span>}
+        {(frontmatter.tags ?? []).map((tag) => (
+          <span class="tag">{tag}</span>
+        ))}
+      </div>
+
+      {(createdDate || updatedDate) && (
+        <p class="recipe-dates">
+          {createdDate && <span>Created: {createdDate}</span>}
+          {createdDate && updatedDate && <span> · </span>}
+          {updatedDate && <span>Updated: {updatedDate}</span>}
+        </p>
+      )}
+    </div>
+
+    <div class="recipe-content">
+      <Content />
+    </div>
+  </div>
+</Layout>
