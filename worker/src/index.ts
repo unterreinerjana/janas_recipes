@@ -17,7 +17,7 @@ interface Env {
   RATE_LIMIT: KVNamespace;
 }
 
-const MAX_SAVES_PER_DAY = 20;
+const MAX_SAVES_PER_DAY = 35;
 
 const ALLOWED_ORIGIN = 'https://unterreinerjana.github.io';
 
