@@ -64,6 +64,8 @@ A short description of this recipe.
   const statusMsg = document.getElementById('status-msg') as HTMLDivElement;
   const textarea = document.getElementById('recipe-content') as HTMLTextAreaElement;
 
+  const PASSWORD_KEY = 'admin_password';
+
   function showStatus(message: string, type: 'success' | 'error') {
     statusMsg.textContent = message;
     statusMsg.className = `status-msg ${type}`;
@@ -72,6 +74,18 @@ A short description of this recipe.
   function clearStatus() {
     statusMsg.textContent = '';
     statusMsg.className = 'status-msg';
+  }
+
+  function getPassword(): string | null {
+    return localStorage.getItem(PASSWORD_KEY);
+  }
+
+  function promptForPassword(): string | null {
+    const pwd = window.prompt('Enter admin password:');
+    if (pwd) {
+      localStorage.setItem(PASSWORD_KEY, pwd);
+    }
+    return pwd;
   }
 
   form.addEventListener('submit', async (event) => {
@@ -84,24 +98,37 @@ A short description of this recipe.
       return;
     }
 
+    let password = getPassword() ?? promptForPassword();
+    if (!password) {
+      showStatus('Password is required to save a recipe.', 'error');
+      return;
+    }
+
     saveBtn.disabled = true;
     saveBtn.textContent = 'Saving…';
 
     try {
-      const response = await fetch('/api/recipes', {
+      const response = await fetch('/api/save-recipe', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${password}`,
+        },
         body: JSON.stringify({ content }),
       });
 
       if (response.ok) {
         showStatus('Recipe saved successfully!', 'success');
         textarea.value = '';
+      } else if (response.status === 401) {
+        // Wrong password — clear stored value and ask again next time
+        localStorage.removeItem(PASSWORD_KEY);
+        showStatus('Incorrect password. Please try again.', 'error');
       } else {
         const errorText = await response.text();
         showStatus(`Failed to save recipe: ${errorText || response.statusText}`, 'error');
       }
-    } catch (err) {
+    } catch {
       showStatus('Error: Could not reach the API. Please try again later.', 'error');
     } finally {
       saveBtn.disabled = false;
