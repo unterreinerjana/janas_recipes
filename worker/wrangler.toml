@@ -5,6 +5,10 @@ compatibility_date = "2025-01-01"
 [vars]
 GITHUB_REPO = "unterreinerjana/janas_recipes"
 
+[[kv_namespaces]]
+binding = "RATE_LIMIT"
+id = "892b7863af9a40d6821baffa91d7c0b8"
+
 # Secrets must be set via CLI (never commit them!):
 #   wrangler secret put ADMIN_PASSWORD
 #   wrangler secret put GITHUB_TOKEN

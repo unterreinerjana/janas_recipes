@@ -14,7 +14,10 @@ interface Env {
   ADMIN_PASSWORD: string;
   GITHUB_TOKEN: string;
   GITHUB_REPO: string; // set in wrangler.toml, e.g. "unterreinerjana/janas_recipes"
+  RATE_LIMIT: KVNamespace;
 }
+
+const MAX_SAVES_PER_DAY = 20;
 
 const ALLOWED_ORIGIN = 'https://unterreinerjana.github.io';
 
@@ -95,6 +98,13 @@ export default {
       )
     );
 
+    // Check daily rate limit
+    const today = new Date().toISOString().slice(0, 10);
+    const currentCount = parseInt((await env.RATE_LIMIT.get(today)) ?? '0', 10);
+    if (currentCount >= MAX_SAVES_PER_DAY) {
+      return new Response('Too Many Requests', { status: 429, headers: corsHeaders });
+    }
+
     // Commit file via GitHub API
     const commitRes = await fetch(
       `https://api.github.com/repos/${env.GITHUB_REPO}/contents/${path}`,
@@ -113,6 +123,9 @@ export default {
       const errorText = await commitRes.text();
       return new Response(`GitHub API error: ${errorText}`, { status: 502, headers: corsHeaders });
     }
+
+    // Increment daily save counter after successful commit
+    await env.RATE_LIMIT.put(today, String(currentCount + 1), { expirationTtl: 172800 }); // 48h TTL
 
     return new Response(JSON.stringify({ slug, filename }), {
       status: 200,
