@@ -1,0 +1,10 @@
+name = "janas-recipes-worker"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+
+[vars]
+GITHUB_REPO = "unterreinerjana/janas_recipes"
+
+# Secrets must be set via CLI (never commit them!):
+#   wrangler secret put ADMIN_PASSWORD
+#   wrangler secret put GITHUB_TOKEN
