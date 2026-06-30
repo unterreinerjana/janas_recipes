@@ -1,37 +1,36 @@
-﻿---
-title: Crème de citron (Lemon Curd)
-tags: [Macaronfüllung, Dessert]
+---
+title: Lemon Curd
+tags: [Creme, Zitrone, süß]
 category: Dessert
-created: 2026-04-03
-updated: 2026-04-03
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
-## Crème de citron (Lemon Curd)
+## Lemon Curd
 
-Quelle: https://www.franzoesischkochen.de/creme-de-citron-lemon-curd-zitronencreme-lemon-curd/
+Quelle: -
 
-Arbeitszeit: 30 Min  
-Ruhezeit: min. 2h im Kühlschrank  
-Koch-/Backzeit: -  
-Gesamt: 2-3h  
+Arbeitszeit: 15 Minuten  
+Ruhezeit: -  
+Koch-/Backzeit: 5 bis 8 Minuten  
+Gesamt: -  
 
-Eine cremige, süß-saure Zitronencreme, die sich als Brotaufstrich oder als Füllung für Tartes und Kuchen eignet.
+Eine süße Zitronencreme mit Butter und Ei zum Abfüllen in Gläser.
 
 ## Zutaten
 
-- 50 ml Zitronensaft pro Ei  
-- 50 g Zucker pro Ei  
-- 1 Ei pro 50 ml Zitronensaft  
-- 20 g Butter pro Ei  
-- 5–6 g Speisestärke oder Mehl pro Ei  
+- 4 Bio-Zitronen
+- 150 g Zucker
+- 1 1/2 TL Speisestärke, gehäuft
+- 80 g Butter
+- 3 große Eier
 
 ## Zubereitung
 
-1. Zitronensaft, Zucker und Butter in einem Topf bei schwacher Hitze erwärmen, bis sich Zucker und Butter vollständig aufgelöst haben.  
-2. Eine kleine Menge der warmen Flüssigkeit aus dem Topf entnehmen und mit der Speisestärke oder dem Mehl klümpchenfrei verrühren.  
-3. Diese Stärke- bzw. Mehlmischung zurück in den Topf zur restlichen Zitronenmasse geben und gut einrühren.  
-4. Die Eier in einer separaten Schüssel verquirlen. Anschließend nach und nach etwas von der warmen Zitronenmasse zu den Eiern geben und dabei ständig rühren, damit die Eier nicht stocken.  
-5. Die nun angeglichene Ei-Zitronen-Mischung zurück in den Topf zur restlichen Masse geben.  
-6. Die Creme bei mittlerer Hitze unter ständigem Rühren erhitzen, bis sie eindickt. Dabei darf die Masse nicht kochen.  
-7. Die Creme sollte eine Temperatur von etwa 72–75 °C erreichen und für etwa 3 Minuten in diesem Temperaturbereich gehalten werden, damit sie die richtige Konsistenz bekommt.  
-8. Anschließend vom Herd nehmen und abkühlen lassen.
+1. Die Zitronen heiß waschen und die Schale abreiben. Die Zitronen anschließend halbieren, auspressen und 150 ml Saft abmessen.
+2. Zitronensaft, Zitronenabrieb, Zucker und Speisestärke in einem Topf gut miteinander verrühren.
+3. Die Mischung aufkochen lassen, die Butter in kleinen Stückchen zugeben und unter Rühren schmelzen lassen.
+4. Die Eier mit einem Schneebesen verquirlen.
+5. Die Herdplatte auf niedrige bis mittlere Hitze zurückschalten und die verquirlten Eier mit einem Schneebesen unter die Zitronenmasse rühren.
+6. Die Creme unter ständigem Rühren auf 70 bis 75 °C erhitzen. Bei dieser Temperatur dickt sie von selbst an. Sie darf dabei nicht kochen, weil die Eier sonst stocken und die Creme ausflocken kann.
+7. Die Konsistenz soll etwas geleeartig sein beziehungsweise an frisch gekochten Pudding erinnern. Beim Abkühlen wird das Lemon Curd noch fester. Nicht zu viel Speisestärke verwenden, sonst wird die Creme zu fest.
